@@ -39,7 +39,7 @@ def index():
     try:
         # Seleccionar todas las tareas
         response = supabase.table('tareas').select('*').order('id', desc=True).execute()
-        tareas = response.get('data', [])
+        tareas = response.data
     except Exception as e:
         print(f"Error al leer: {e}")
         tareas = []
@@ -52,7 +52,7 @@ def mostrar_editar_tarea(id):
     try:
         # Obtener la tarea específica por ID
         response = supabase.table('tareas').select('*').eq('id', id).single().execute()
-        tarea = response.get('data')
+        tarea = response.data
         if not tarea:
             return "Tarea no encontrada", 404
     except Exception as e:
