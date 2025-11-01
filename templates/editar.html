@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Tarea</title>
+    <style> body { font-family: sans-serif; margin: 2em; } </style>
+</head>
+<body>
+    <h1>Editar Tarea</h1>
+
+    <form action="/actualizar/{{ tarea.id }}" method="POST">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" value="{{ tarea.titulo }}" required>
+
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" value="{{ tarea.descripcion }}">
+
+        <label for="completada">Completada:</label>
+        <input type="checkbox" id="completada" name="completada" {% if tarea.completada %}checked{% endif %}>
+
+        <button type="submit">Actualizar Tarea</button>
+    </form>
+
+    <a href="/">Cancelar y volver</a>
+</body>
+</html>

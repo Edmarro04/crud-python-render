@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tareas</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        .tarea { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+        .completada { text-decoration: line-through; background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <h1>Gestión de Tareas</h1>
+
+    <h2>Nueva Tarea</h2>
+    <form action="/crear" method="POST">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion">
+        <button type="submit">Guardar Tarea</button>
+    </form>
+
+    <hr>
+
+    <h2>Tareas Pendientes</h2>
+    {% for tarea in tareas %}
+        <div class="tarea {% if tarea.completada %}completada{% endif %}">
+            <h3>{{ tarea.titulo }}</h3>
+            <p>{{ tarea.descripcion }}</p>
+            <small>Completada: {{ "Sí" if tarea.completada else "No" }}</small>
+            <br>
+            <a href="/editar/{{ tarea.id }}">Editar</a>
+            <a href="/eliminar/{{ tarea.id }}" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+        </div>
+    {% endfor %}
+</body>
+</html>
